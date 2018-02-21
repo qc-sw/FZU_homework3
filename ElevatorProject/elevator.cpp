@@ -66,7 +66,7 @@ int main() {
 				{
 					man[z].status = "in";
 					num++;
-					in = 1;
+					in++;
 				}
 			}
 			//判断是否送客
@@ -77,13 +77,22 @@ int main() {
 					man[x].status = "out";
 					index = x;
 				}
-			if (out != 0)
+			if (in != 0)
 			{
-				num -= out;
-				outfile << time_for_now << "时，停靠在" << man[index].direction << "楼" << endl;
+				if (out == 0)
+					outfile << time_for_now << "时，停靠在" << man[index].direction << "楼接" << in << "位客人" << endl;
+				else
+				{
+					num -= out;
+					outfile << time_for_now << "时，停靠在" << man[index].direction << "楼接" << in << "位客人" << "并送" << out << "位客人" << endl;
+				}
 			}
-
-			//对电梯位置location进行操作
+			else
+				if (in == 0 && out != 0)
+				{
+					num -= out;
+					outfile << time_for_now << "时，停靠在" << man[index].direction << "楼送" << out << "位客人" << endl;
+				}
 			if ((in + out) == 0 && judge())
 				if (man[j].status == "wait")
 				{
