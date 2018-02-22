@@ -16,7 +16,7 @@ struct passengers {
 	string status = "offline";
 };
 //创建五个乘客、假设有个第0个乘客
-struct passengers man[7];
+struct passengers man[6];
 bool judge() {
 	for (int i = 1;i <= 5;i++)
 		if (man[i].status == "wait" || man[i].status == "in")
@@ -47,6 +47,7 @@ int main() {
 		}
 		//给第0个乘客的终点赋值1
 		man[0].direction = 1;
+		//重置数据
 		sum_time = 0;
 		time_for_now = 0;
 		location = 0;
@@ -77,6 +78,7 @@ int main() {
 					man[x].status = "out";
 					index = x;
 				}
+			//输出控制
 			if (in != 0)
 			{
 				if (out == 0)
@@ -93,6 +95,7 @@ int main() {
 					num -= out;
 					outfile << time_for_now << "时，停靠在" << man[index].direction << "楼送" << out << "位客人" << endl;
 				}
+			//电梯位置控制
 			if ((in + out) == 0 && judge())
 				if (man[j].status == "wait")
 				{
@@ -120,6 +123,7 @@ int main() {
 				if (time_for_now >= man[i].time  && man[i].status != "out")
 					sum_time++;
 			}
+			//时间轴向前
 			time_for_now++;
 			j += out;
 		}
